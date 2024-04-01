@@ -1,7 +1,19 @@
 import React from 'react';
 import RaffleCard from './RaffleCard';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { publicKey } from '@metaplex-foundation/umi';
 
 const HomePage = () => {
+  const wallet = useWallet();
+
+  if (!wallet.publicKey) {
+    return (
+      <div className='flex items-center justify-center'>Connect Wallet</div>
+    );
+  }
+
+  let walletString = publicKey(wallet.publicKey);
+
   return (
     <>
       <div className='border grid grid-cols-4 p-2'>

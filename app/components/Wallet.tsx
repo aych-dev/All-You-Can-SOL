@@ -1,3 +1,5 @@
+'use client';
+
 import {
   WalletProvider,
   ConnectionProvider,
@@ -8,16 +10,15 @@ import {
   LedgerWalletAdapter,
   SolflareWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import '@solana/wallet-adapter-react-ui/styles.css';
-import '../styles/globals.css';
 
 type Props = {
   children?: React.ReactNode;
 };
 
-export default function Wallet({ children }: Props) {
+export const Wallet: FC<Props> = ({ children }) => {
   const endpoint = 'https://fancy-daphna-fast-mainnet.helius-rpc.com/';
   const wallets = useMemo(
     () => [
@@ -29,12 +30,10 @@ export default function Wallet({ children }: Props) {
   );
 
   return (
-    <>
+    <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
-        <ConnectionProvider endpoint={endpoint}>
-          <WalletModalProvider>{children}</WalletModalProvider>
-        </ConnectionProvider>
+        <WalletModalProvider>{children}</WalletModalProvider>
       </WalletProvider>
-    </>
+    </ConnectionProvider>
   );
-}
+};

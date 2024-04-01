@@ -1,5 +1,13 @@
+'use client';
+
 import React from 'react';
-import WalletConnectButton from '../utils/WalletConnectButton';
+import dynamic from 'next/dynamic';
+
+const WalletMultiButtonDynamic = dynamic(
+  async () =>
+    (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+  { ssr: false }
+);
 
 const NavBar = () => {
   return (
@@ -10,7 +18,7 @@ const NavBar = () => {
         <p>spot c</p>
       </div>
       <div>
-        <WalletConnectButton />
+        <WalletMultiButtonDynamic />
       </div>
     </div>
   );

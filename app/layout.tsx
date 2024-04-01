@@ -1,7 +1,8 @@
-import type { Metadata } from 'next';
 import './globals.css';
 import NavBar from './components/NavBar';
-import Wallet from './utils/Wallet';
+import { Wallet } from '@/app/components/Wallet';
+
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'AYCS',
@@ -14,13 +15,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Wallet>
-      <div className='flex flex-col h-screen max-h-screen'>
-        <NavBar />
-        <div className='flex-grow overflow-y-auto bg-customPage text-customText'>
-          {children}
+    <html lang='en'>
+      <body>
+        <div className='flex flex-col h-screen max-h-screen'>
+          <Wallet>
+            <NavBar />
+            <div className='flex-grow overflow-y-auto bg-customPage text-customText'>
+              {children}
+            </div>
+          </Wallet>
         </div>
-      </div>
-    </Wallet>
+      </body>
+    </html>
   );
 }
