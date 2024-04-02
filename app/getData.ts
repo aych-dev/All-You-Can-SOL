@@ -21,19 +21,19 @@ export async function getData(owner: string) {
   });
 
   const { result } = await res.json();
+  console.log(result);
 
   if (!result) {
     return;
   }
 
   result.items.map((item) => {
-    if (!item.token_info.token_program) {
-      return null;
+    if (!item.token_info) {
+      return;
     } else {
       tokenList.push(item.token_info.token_program);
     }
   });
-  console.log(tokenList);
 
   return tokenList;
 }

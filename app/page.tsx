@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getData } from './getData';
-import HomePage from './components/HomePage';
+import { divideAmount } from '@metaplex-foundation/umi';
 
 export default function Home() {
   const wallet = useWallet();
@@ -17,9 +17,18 @@ export default function Home() {
     fetchData();
   }, [wallet.publicKey]);
 
-  return (
-    <>
-      <div>{result}</div>
-    </>
-  );
+  if (!wallet.publicKey) {
+    return <div>connect wallet</div>;
+  }
+  let resultElement;
+
+  if (!result) {
+    return;
+  } else {
+    resultElement = result.map((item) => {
+      return <p>{item}</p>;
+    });
+  }
+
+  return <>{resultElement}</>;
 }
