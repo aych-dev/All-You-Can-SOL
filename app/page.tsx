@@ -3,32 +3,37 @@
 import React, { useEffect, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getData } from './getData';
-import { divideAmount } from '@metaplex-foundation/umi';
 
 export default function Home() {
   const wallet = useWallet();
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getData(wallet.publicKey?.toBase58());
-      setResult(data);
+      try {
+        const data = await getData(wallet.publicKey?.toBase58()!);
+        if (!data) {
+          throw new Error('Data is undefined');
+        }
+        setResult(data);
+      } catch (error) {
+        console.error('could not fetch data');
+      }
     };
     fetchData();
   }, [wallet.publicKey]);
 
   if (!wallet.publicKey) {
-    return <div>connect wallet</div>;
-  }
-  let resultElement;
-
-  if (!result) {
-    return;
-  } else {
-    resultElement = result.map((item) => {
-      return <p>{item}</p>;
-    });
+    return (
+      <div className='flex items-center justify-center'>Connect Wallet</div>
+    );
   }
 
-  return <>{resultElement}</>;
+  return (
+    <>
+      <div className='flex items-center justify-center'>
+        You Own {result} NFTs
+      </div>
+    </>
+  );
 }
