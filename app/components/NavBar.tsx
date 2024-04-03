@@ -18,7 +18,7 @@ const NavBar = () => {
         <p>spot c</p>
       </div>
       <div>
-        <WalletMultiButtonDynamic />
+        <WalletMultiButtonDynamic>Connect Wallet</WalletMultiButtonDynamic>
       </div>
     </div>
   );
