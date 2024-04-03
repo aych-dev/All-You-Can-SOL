@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 const WalletMultiButtonDynamic = dynamic(
   async () =>
@@ -10,6 +11,7 @@ const WalletMultiButtonDynamic = dynamic(
 );
 
 const NavBar = () => {
+  const wallet = useWallet();
   return (
     <div className='bg-customNav flex justify-between p-4 text-customText'>
       <div className='flex items-center space-x-4'>
@@ -18,7 +20,11 @@ const NavBar = () => {
         <p>spot c</p>
       </div>
       <div>
-        <WalletMultiButtonDynamic>Connect Wallet</WalletMultiButtonDynamic>
+        <WalletMultiButtonDynamic>
+          {wallet.publicKey
+            ? wallet.publicKey.toBase58().substring(0, 7) + '...'
+            : 'Connect Wallet'}
+        </WalletMultiButtonDynamic>
       </div>
     </div>
   );
