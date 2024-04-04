@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getData } from './getData';
+import RaffleCard from './components/RaffleCard';
 
 export default function Home() {
   const wallet = useWallet();
@@ -31,9 +32,33 @@ export default function Home() {
 
   return (
     <>
-      <div className='flex items-center justify-center'>
-        You Own {result} NFTs
+      <div className='border grid grid-cols-4 p-2'>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
+        <div className='p-2'>
+          <RaffleCard />
+        </div>
       </div>
+      <div className=' border p-2 border-orange-300'>test</div>
     </>
   );
 }

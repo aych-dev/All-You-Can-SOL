@@ -2,7 +2,7 @@ import React from 'react';
 
 const RaffleCard = () => {
   return (
-    <div className='border border-green-400 p-3 flex flex-col'>
+    <div className='border border-green-300 p-3 flex flex-col'>
       <div className='flex flex-col items-center justify-center'>
         <button className='rounded p-2 border'>CLICK</button>
         <h3>Tesla CyberTruck</h3>

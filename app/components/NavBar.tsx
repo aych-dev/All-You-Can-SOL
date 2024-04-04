@@ -7,7 +7,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 const WalletMultiButtonDynamic = dynamic(
   async () =>
     (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
-  { ssr: true }
+  { ssr: false }
 );
 
 const NavBar = () => {

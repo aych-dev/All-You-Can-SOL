@@ -8,18 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      backgroundImage: {},
+      colors: {
+        customNav: '#18222f',
+        customPage: '#2b3441',
+        customCard: '#47566a',
+        customCardHover: '#4f5e74',
+        customText: '#f1f3f5',
       },
-    },
-    colors: {
-      customNav: '#18222f',
-      customPage: '#2b3441',
-      customCard: '#47566a',
-      customCardHover: '#4f5e74',
-      customText: '#f1f3f5',
     },
   },
   plugins: [],
