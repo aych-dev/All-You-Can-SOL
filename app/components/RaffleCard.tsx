@@ -1,12 +1,17 @@
 import React from 'react';
 
-const RaffleCard = () => {
+interface Props {
+  tokenOwned: string[];
+}
+
+const RaffleCard = ({ tokenOwned }: Props) => {
   return (
     <div className='border border-green-300 p-3 flex flex-col'>
       <div className='flex flex-col items-center justify-center'>
-        <button className='rounded p-2 border'>CLICK</button>
         <h3>Tesla CyberTruck</h3>
-        <h4>Enter Raffle</h4>
+        <button className='border border-white p-2'>
+          {tokenOwned} NFTs Owned
+        </button>
       </div>
       <div>
         <div className='flex items-center justify-center'>IMAGE</div>

@@ -7,7 +7,7 @@ import RaffleCard from './components/RaffleCard';
 
 export default function Home() {
   const wallet = useWallet();
-  const [result, setResult] = useState<string[]>([]);
+  const [tokenOwned, setTokenOwned] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +16,7 @@ export default function Home() {
         if (!data) {
           throw new Error('Data is undefined');
         }
-        setResult(data);
+        setTokenOwned(data);
       } catch (error) {
         console.error('could not fetch data');
       }
@@ -34,28 +34,7 @@ export default function Home() {
     <>
       <div className='border grid grid-cols-4 p-2'>
         <div className='p-2'>
-          <RaffleCard />
-        </div>
-        <div className='p-2'>
-          <RaffleCard />
-        </div>
-        <div className='p-2'>
-          <RaffleCard />
-        </div>
-        <div className='p-2'>
-          <RaffleCard />
-        </div>
-        <div className='p-2'>
-          <RaffleCard />
-        </div>
-        <div className='p-2'>
-          <RaffleCard />
-        </div>
-        <div className='p-2'>
-          <RaffleCard />
-        </div>
-        <div className='p-2'>
-          <RaffleCard />
+          <RaffleCard tokenOwned={tokenOwned} />
         </div>
       </div>
       <div className=' border p-2 border-orange-300'>test</div>

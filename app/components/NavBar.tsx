@@ -22,7 +22,7 @@ const NavBar = () => {
       <div>
         <WalletMultiButtonDynamic>
           {wallet.publicKey
-            ? wallet.publicKey.toBase58().substring(0, 7) + '...'
+            ? `${wallet.publicKey.toBase58().substring(0, 7)}...`
             : 'Connect Wallet'}
         </WalletMultiButtonDynamic>
       </div>

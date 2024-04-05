@@ -1,9 +1,5 @@
 'use server';
 
-interface TokenList {
-  token_info: { token_program: string };
-}
-
 export async function getData(owner: string) {
   let tokenList: string[] = [];
   const url = `https://mainnet.helius-rpc.com/?api-key=9d62c6ca-3562-4cbb-bdbc-f6aac8797fab`;
