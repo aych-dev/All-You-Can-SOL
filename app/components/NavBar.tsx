@@ -15,9 +15,9 @@ const NavBar = () => {
   return (
     <div className='bg-customNav flex justify-between p-4 text-customText'>
       <div className='flex items-center space-x-4'>
-        <p>spot a</p>
-        <p>spot b</p>
-        <p>spot c</p>
+        <h3 className='font-serif'>
+          <span className='text-purple-400'>A</span>llYouCanSOL
+        </h3>
       </div>
       <div>
         <WalletMultiButtonDynamic>
