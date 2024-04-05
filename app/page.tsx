@@ -26,7 +26,13 @@ export default function Home() {
 
   if (!wallet.publicKey) {
     return (
-      <div className='flex items-center justify-center'>Connect Wallet</div>
+      <div className='flex items-center justify-center h-screen'>
+        <div className='border p-12 flex flex-col items-center justify-center mx-3'>
+          <h2>AYCS</h2>
+          <p>Free Stuff For Owning A Solana NFT</p>
+          <h3>Connect Wallet To Begin</h3>
+        </div>
+      </div>
     );
   }
 
@@ -37,7 +43,6 @@ export default function Home() {
           <RaffleCard tokenOwned={tokenOwned} />
         </div>
       </div>
-      <div className=' border p-2 border-orange-300'>test</div>
     </>
   );
 }

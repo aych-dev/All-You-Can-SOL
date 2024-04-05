@@ -10,8 +10,13 @@ const RaffleCard = ({ tokenOwned }: Props) => {
   return (
     <div className='border border-green-300 p-3 flex flex-col'>
       <div className='flex flex-col items-center justify-center'>
-        <h3 className='text-center'>Title</h3>
-        <button className='border border-white p-2'>
+        <h3 className='text-center mb-5'>$1000 Dunkin Gift Card</h3>
+        <button
+          className={`border border-white p-2 ${
+            !tokenOwned[0] && 'text-red-600 font-bold opacity-50'
+          }`}
+          disabled={!tokenOwned[0]}
+        >
           {tokenOwned[0] ? 'Enter Raffle' : 'Not Eligble'}
         </button>
       </div>
@@ -19,12 +24,12 @@ const RaffleCard = ({ tokenOwned }: Props) => {
         <Image
           src={dunkinLogo}
           alt='Dunkin Donuts Logo'
-          className='flex items-center justify-center rounded-full p-2'
+          className='flex items-center justify-center rounded-full p-4'
         />
       </div>
-      <div className='flex justify-between'>
-        <p>Entries</p>
-        <p>Time Left</p>
+      <div className='flex justify-between mt-3'>
+        <p>69 Entries</p>
+        <p>Raffle Ends In 2 Hours</p>
       </div>
     </div>
   );
