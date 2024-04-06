@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getData } from './getData';
 import RaffleCard from './components/RaffleCard';
+import dunkinLogo from '@/public/images/DunkinLogo.jpeg';
 
 export default function Home() {
   const wallet = useWallet();
@@ -38,11 +39,7 @@ export default function Home() {
 
   return (
     <>
-      <div className='border grid grid-cols-4 p-2'>
-        <div className='p-2'>
-          <RaffleCard tokenOwned={tokenOwned} />
-        </div>
-      </div>
+      <RaffleCard tokenOwned={tokenOwned} />
     </>
   );
 }
