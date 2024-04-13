@@ -1,7 +1,9 @@
-import React from 'react';
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
-const page = () => {
-  return <div>Raffle For </div>;
-};
+export default async function RaffleForm() {
+  const session = await getServerSession()
+  
 
-export default page;
+
+}
