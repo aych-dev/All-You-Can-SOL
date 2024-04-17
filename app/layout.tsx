@@ -1,7 +1,6 @@
 import './globals.css';
 import NavBar from './components/NavBar';
 import { Wallet } from '@/app/components/Wallet';
-
 import type { Metadata } from 'next';
 import Footer from './components/Footer';
 
