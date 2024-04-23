@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import { Wallet } from '@/app/components/Wallet';
 import type { Metadata } from 'next';
 import Footer from './components/Footer';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
   title: 'AYCS',
@@ -25,6 +26,7 @@ export default async function RootLayout({
             </div>
             <Footer />
           </Wallet>
+          <ToastContainer position='bottom-right' />
         </div>
       </body>
     </html>

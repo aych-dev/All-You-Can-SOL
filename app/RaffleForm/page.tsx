@@ -1,9 +1,5 @@
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
+import { redirect } from 'next/navigation';
 
 export default async function RaffleForm() {
-  const session = await getServerSession()
-  
-
-
+  return <div>RaffleForm</div>;
 }

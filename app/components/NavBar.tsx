@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useWallet } from '@solana/wallet-adapter-react';
 
@@ -12,6 +12,7 @@ const WalletMultiButtonDynamic = dynamic(
 
 const NavBar = () => {
   const wallet = useWallet();
+
   return (
     <div className='bg-customNav flex justify-between p-4 text-customText'>
       <div className='flex items-center space-x-4'>

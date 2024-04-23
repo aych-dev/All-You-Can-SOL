@@ -2,7 +2,7 @@
 
 export async function getData(owner: string) {
   let tokenList: string[] = [];
-  const url = `https://mainnet.helius-rpc.com/?api-key=9d62c6ca-3562-4cbb-bdbc-f6aac8797fab`;
+  const url = `https://fancy-daphna-fast-mainnet.helius-rpc.com/`;
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -22,7 +22,7 @@ export async function getData(owner: string) {
   });
 
   const { result } = await res.json();
-  console.log('NFTs owned:', result);
+  // console.log('NFTs owned:', result);
 
   if (!result) {
     return;

@@ -5,8 +5,7 @@ import {
   TransactionInstruction,
 } from '@solana/web3.js';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { NETWORK } from '@utils/endpoints';
-import { MEMO_PROGRAM_ID, NONCE } from '@utils/globals';
+import { MEMO_PROGRAM_ID, NONCE } from '@/app/utils/global';
 
 export type SignCreateData = {
   tx: string;
@@ -19,7 +18,9 @@ export default async function handler(
   if (req.method === 'POST') {
     const { publicKeyStr } = req.body;
 
-    const connection = new Connection(NETWORK);
+    const connection = new Connection(
+      'https://fancy-daphna-fast-mainnet.helius-rpc.com/'
+    );
     const publicKey = new PublicKey(publicKeyStr);
 
     // Ideally this would be stored in a DB for each publicKey
