@@ -44,47 +44,62 @@ export default function Home() {
     }
   }, [wallet.publicKey]);
 
-  const onSignClick = async () => {
-    if (wallet.publicKey && wallet.signTransaction && signState === 'initial') {
-      setSignState('loading');
-      const signToastId = toast.loading('Signing message...');
+  useEffect(() => {
+    async function sign() {
+      if (
+        wallet.publicKey &&
+        wallet.signTransaction &&
+        signState === 'initial'
+      ) {
+        setSignState('loading');
+        const signToastId = toast.loading('Signing message...');
 
-      try {
-        // Request signature tx from server
-        const { tx: createTx } = await fetcher<SignCreateData>(
-          '/api/sign/create',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              publicKeyStr: wallet.publicKey.toBase58(),
-            }),
-            headers: { 'Content-type': 'application/json; charset=UTF-8' },
-          }
-        );
+        try {
+          // Request signature tx from server
+          const { tx: createTx } = await fetcher<SignCreateData>(
+            'https://localhost:3000/api/sign/create',
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                publicKeyStr: wallet.publicKey.toBase58(),
+              }),
+              headers: { 'Content-type': 'application/json; charset=UTF-8' },
+            }
+          );
 
-        const tx = Transaction.from(Buffer.from(createTx, 'base64'));
+          const tx = Transaction.from(Buffer.from(createTx, 'base64'));
 
-        // Request signature from wallet
-        const signedTx = await wallet.signTransaction(tx);
+          // Request signature from wallet
+          const signedTx = await wallet.signTransaction(tx);
 
-        // Validate signed transaction
-        await fetcher<SignValidateData>('/api/sign/validate', {
-          method: 'POST',
-          body: JSON.stringify({
-            signedTx: signedTx.serialize().toString('base64'),
-          }),
-          headers: { 'Content-type': 'application/json; charset=UTF-8' },
-        });
+          // Validate signed transaction
+          await fetcher<SignValidateData>(
+            'https://localhost:3000/api/sign/validate',
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                signedTx: signedTx.serialize().toString('base64'),
+              }),
+              headers: { 'Content-type': 'application/json; charset=UTF-8' },
+            }
+          );
 
-        setSignState('success');
-        toast.success('Message signed', { toastId: signToastId });
-      } catch (error: any) {
-        setSignState('error');
-        toast.error('Error verifying wallet, please reconnect wallet', {
-          toastId: signToastId,
-        });
+          setSignState('success');
+          toast.success('Message signed', { toastId: signToastId });
+        } catch (error: any) {
+          setSignState('error');
+          toast.error('Error verifying wallet, please reconnect wallet', {
+            toastId: signToastId,
+          });
+        }
       }
     }
+
+    sign();
+  }, [signState, wallet.signTransaction, wallet.publicKey]);
+
+  const onSignClick = () => {
+    setSignState('initial');
   };
 
   if (!wallet.publicKey) {
@@ -102,7 +117,7 @@ export default function Home() {
   return (
     <>
       {/* <RaffleCard tokenOwned={tokenOwned} /> */}
-      <div className='flex items-center justify-center'>
+      <div className='flex items-center justify-center p-3'>
         <button
           onClick={onSignClick}
           className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
