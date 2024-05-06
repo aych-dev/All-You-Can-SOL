@@ -6,7 +6,7 @@ export type SignValidateData = {
   message: string;
 };
 
-export default async function handler(
+export default async function POST(
   req: NextApiRequest,
   res: NextApiResponse<SignValidateData>
 ) {
@@ -26,7 +26,7 @@ export default async function handler(
         !tx.verifySignatures()
       ) {
         res.status(401).json({ message: 'Invalid signature!' });
-      } else {
+      } else {~
         res.status(200).json({ message: 'Wallet verified' });
       }
     } catch (e) {

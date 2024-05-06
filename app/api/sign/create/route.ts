@@ -6,20 +6,18 @@ import {
 } from '@solana/web3.js';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { MEMO_PROGRAM_ID, NONCE } from '@/app/utils/global';
+import { NextResponse } from 'next/server';
 
 export type SignCreateData = {
   tx: string;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<SignCreateData>
-) {
+export default async function POST(req: NextApiRequest) {
   if (req.method === 'POST') {
     const { publicKeyStr } = req.body;
 
     const connection = new Connection(
-      'https://fancy-daphna-fast-mainnet.helius-rpc.com/'
+      'https://solana-mainnet.rpc.extrnode.com/fa638cba-144e-4bbf-960d-85a14d1a0fb7'
     );
     const publicKey = new PublicKey(publicKeyStr);
 
@@ -49,8 +47,8 @@ export default async function handler(
 
     const txBase64 = serializedTransaction.toString('base64');
 
-    res.status(200).json({ tx: txBase64 });
+    return NextResponse.json({ tx: txBase64 });
   } else {
-    res.status(405).json({ tx: '' });
+    NextResponse.json({ tx: '' });
   }
 }

@@ -7,8 +7,8 @@ import RaffleCard from './components/RaffleCard';
 import { toast } from 'react-toastify';
 import { fetcher } from './utils/use-data-fetch';
 import { Transaction } from '@solana/web3.js';
-import { SignCreateData } from './api/sign/create';
-import { SignValidateData } from './api/sign/validate';
+import { SignCreateData } from './api/sign/create/route';
+import { SignValidateData } from './api/sign/validate/route';
 
 export default function Home() {
   const wallet = useWallet();
@@ -26,6 +26,7 @@ export default function Home() {
           throw new Error('Data is undefined');
         }
         setTokenOwned(data);
+        console.log(tokenOwned);
       } catch (error) {
         console.error('could not fetch data');
       }
@@ -57,7 +58,7 @@ export default function Home() {
         try {
           // Request signature tx from server
           const { tx: createTx } = await fetcher<SignCreateData>(
-            'https://localhost:3000/api/sign/create',
+            '/api/sign/create',
             {
               method: 'POST',
               body: JSON.stringify({
@@ -116,15 +117,15 @@ export default function Home() {
 
   return (
     <>
-      {/* <RaffleCard tokenOwned={tokenOwned} /> */}
-      <div className='flex items-center justify-center p-3'>
+      <RaffleCard tokenOwned={tokenOwned} />
+      {/* <div className='flex items-center justify-center p-3'>
         <button
           onClick={onSignClick}
           className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
         >
           Verify Wallet
         </button>
-      </div>
+      </div> */}
     </>
   );
 }
